@@ -1,0 +1,21 @@
+Age,Gender,Medical_History,Symptom,Medication
+25,F,None,Headache,Painkiller
+30,M,Diabetes,Fatigue,Insulin
+35,F,Hypertension,Chest Pain,Beta-blockers
+40,M,None,Headache,Painkiller
+45,F,Asthma,Cough,Cough Syrup
+50,M,Diabetes,Fatigue,Insulin
+60,F,None,Headache,Painkiller
+35,M,Hypertension,Fatigue,Beta-blockers
+28,F,Asthma,Cough,Cough Syrup
+42,M,None,Chest Pain,Painkiller
+29,F,None,Fatigue,Painkiller
+52,M,Hypertension,Chest Pain,Beta-blockers
+33,F,Diabetes,Headache,Insulin
+60,M,None,Cough,Cough Syrup
+50,F,Asthma,Fatigue,Cough Syrup
+45,M,Hypertension,Chest Pain,Beta-blockers
+32,F,None,Headache,Painkiller
+40,M,Asthma,Cough,Cough Syrup
+38,F,Hypertension,Fatigue,Beta-blockers
+55,M,None,Headache,Painkiller
