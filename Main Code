@@ -1,0 +1,46 @@
+import pandas as pd
+from sklearn.model_selection import train_test_split, StratifiedKFold, cross_val_score
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+import numpy as np
+
+# Load the dataset
+df = pd.read_csv('/content/Personalized_Treatment_Recommendation.csv')
+
+# Convert categorical data to numerical data
+df['Gender'] = df['Gender'].map({'F': 0, 'M': 1})
+df['Medical_History'] = df['Medical_History'].map({'None': 0, 'Diabetes': 1, 'Hypertension': 2, 'Asthma': 3})
+df['Symptom'] = df['Symptom'].map({'Headache': 0, 'Fatigue': 1, 'Chest Pain': 2, 'Cough': 3})
+
+# Features (X) and target (y)
+X = df.drop('Medication', axis=1)
+y = df['Medication']
+
+# Split the data into training and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Initialize Random Forest Classifier
+model = RandomForestClassifier()
+
+# Use StratifiedKFold to ensure balanced class distribution in each fold
+skf = StratifiedKFold(n_splits=3, shuffle=True, random_state=42)
+
+# Evaluate using stratified cross-validation
+cv_scores = cross_val_score(model, X, y, cv=skf)
+print(f"Stratified cross-validation accuracy: {np.mean(cv_scores) * 100:.2f}%")
+
+# Train the model
+model.fit(X_train, y_train)
+
+# Make predictions
+y_pred = model.predict(X_test)
+
+# Evaluate the model
+accuracy = accuracy_score(y_test, y_pred)
+print(f"Test set accuracy: {accuracy * 100:.2f}%")
+
+# Example of recommending medication for a new patient
+new_patient = pd.DataFrame({'Age': [30], 'Gender': [0], 'Medical_History': [0], 'Symptom': [0]})
+medication_recommendation = model.predict(new_patient)
+print(f"Recommended Medication: {medication_recommendation[0]}")
+
